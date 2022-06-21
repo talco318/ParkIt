@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".registerFragment">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/RegisterText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Welcome to register page"
+            android:textSize="30sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/emailTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Email:"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/emailRegisterTb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Email address"
+            android:autofillHints="emailAddress"
+            android:inputType="textEmailAddress"
+            android:minHeight="28dp"
+            android:textSize="24sp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/passTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Password:"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/tbRegisterPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="password"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Enter password"
+            android:inputType="textPassword"
+            android:minHeight="28dp"
+            android:text=""
+            android:textSize="24sp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/passValidation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Password validation:"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/tbPasswordValidation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:autofillHints="password"
+            android:hint="And again.."
+            android:inputType="textPassword"
+            android:minHeight="28dp"
+            android:text=""
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/phoneTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Phone Number:"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/phoneTb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:autofillHints="phone"
+            android:hint="Phone number"
+            android:inputType="phone"
+            android:minHeight="28dp"
+            android:text=""
+            android:textSize="24sp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+
+        <TextView
+            android:id="@+id/nameTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Full name:"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/nameTb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Full name"
+            android:autofillHints="name"
+            android:inputType="textPersonName"
+            android:minHeight="28dp"
+            android:text=""
+            android:textSize="24sp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
+            android:backgroundTint="#0271C0"
+            android:text="Register"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:textColor="@color/white"
+            android:theme="@style/ShapeAppearanceOverlay.Material3.Button" />
+
+    </LinearLayout>
+
+
+
+
+    </ScrollView>
+</LinearLayout>
