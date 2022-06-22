@@ -1,65 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".mapFragment"
-    tools:ignore="MissingDefaultResource">
-
-<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context=".mapFragment"
+    tools:ignore="MissingDefaultResource">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:text="This is the main app screen"
-        android:textSize="20sp" />
-
-    <WebView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="511dp"
-        android:layout_gravity="center_horizontal|center_vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </WebView>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="This is the main app screen"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/placeNameTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="The parking found in:"
-        android:textSize="20sp" />
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/placeName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Place_Name fragment"
-        android:textSize="20sp"/>
+        </FrameLayout>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:text="Add this parking" />
+        <TextView
+            android:id="@+id/placeNameTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The parking found in:"
+            android:textSize="20sp" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/cancel_button"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_gravity="bottom|end"
-        android:layout_margine="10dp"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/back"
-        app:backgroundTint="#C50000"
-        app:fabCustomSize="45dp"
-        android:contentDescription="@string/login_failed"/>
+        <TextView
+            android:id="@+id/placeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Place_Name fragment"
+            android:textSize="20sp" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="Add this parking" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/cancel_button"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="@string/login_failed"
+            android:src="@drawable/back"
+            app:backgroundTint="#C50000"
+            app:fabCustomSize="45dp" />
+
+    </LinearLayout>
 
 </LinearLayout>
