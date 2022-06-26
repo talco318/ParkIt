@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "333702118835",
+    "project_id": "fir-fa3f5",
+    "storage_bucket": "fir-fa3f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333702118835:android:62d8e7cd0e7874c2839fc6",
+        "android_client_info": {
+          "package_name": "com.talco.brandnewapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "333702118835-47pcfnqa9h01bgl9qr1o8l25aja8abp9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_lB0aN1QCk8vyX_VZMprD4HQ7hDG3ieM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "333702118835-47pcfnqa9h01bgl9qr1o8l25aja8abp9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
