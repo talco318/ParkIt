@@ -1,14 +1,8 @@
 package com.talco.brandnewapp;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,16 +18,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.SupportMapFragment;
+
 import java.io.IOException;
-import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
 
 public class SecActivity extends AppCompatActivity {
 
 
-    private TextView latitudeFeild;
-    private TextView longlatitudeFeild;
+    private TextView latitudeF;
+    private TextView longlatitudeF;
     private TextView locationField;
     private LocationManager locationManager;
     private String provider;
@@ -47,12 +42,8 @@ public class SecActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sec);
         locationField = (TextView) findViewById(R.id.placeName);
-
-
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
         Criteria criteria = new Criteria();
-
         provider = locationManager.getBestProvider(criteria,false);
         if(provider!=null){
             if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
@@ -66,19 +57,24 @@ public class SecActivity extends AppCompatActivity {
                 onLocalChanged(location);
 
             }else{
-                latitudeFeild.setText("location not available!");
-                longlatitudeFeild.setText("location not available!");
+                latitudeF.setText("location not available!");
+                longlatitudeF.setText("location not available!");
             }
         }
     }
 
     public void onLocalChanged(Location location) {
-        intent = new Intent(this, MapsActivity.class);
+        intent = new Intent(this, this.getClass());
+
+        //old one is under this line:
+        //intent = new Intent(this, MapsActivity.class);
+
+
         String lat = location.getLatitude()+"";
         String lng = location.getLongitude()+"";
         com.talco.brandnewapp.location location_xy = new com.talco.brandnewapp.location(lat,lng);
-        latitudeFeild.setText(String.valueOf(lat));
-        longlatitudeFeild.setText(String.valueOf(lng));
+        latitudeF.setText(String.valueOf(lat));
+        longlatitudeF.setText(String.valueOf(lng));
         try{
 
             get_full(location.getLatitude(),location.getLongitude());
