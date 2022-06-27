@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".loginFragments">
+    tools:context=".loginFragments"
+    android:baselineAligned="false">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -17,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.8"
             android:gravity="center_horizontal|center_vertical"
-            android:text="Welcome to login page"
+            android:text="@string/welcome_to_login_page"
             android:textSize="30sp" />
 
         <TextView
@@ -26,7 +27,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_horizontal|center_vertical"
-            android:text="Email:"
+            android:text="@string/email"
             android:textSize="28sp" />
 
         <EditText
@@ -35,7 +36,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Email address"
+            android:hint="@string/email_address"
             android:autofillHints="emailAddress"
             android:inputType="textEmailAddress"
             android:minHeight="48dp" />
@@ -46,7 +47,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_horizontal|center_vertical"
-            android:text="Password:"
+            android:text="@string/password"
             android:textSize="28sp" />
 
         <EditText
@@ -54,12 +55,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:ems="10"
-            android:hint="Password"
             android:autofillHints="password"
+            android:ems="10"
+            android:hint="@string/password_login"
             android:inputType="textPassword"
             android:minHeight="48dp"
-            android:text="" />
+            android:text=""
+            android:textColorHint="#757575" />
 
         <Button
             android:id="@+id/loginButton"
@@ -69,7 +71,7 @@
             android:layout_marginRight="4dp"
             android:layout_weight="0.8"
             android:backgroundTint="#0271C0"
-            android:text="Login"
+            android:text="@string/login"
             android:textColor="@color/white"
             android:layout_gravity="center_vertical|center_horizontal"
             android:theme="@style/ShapeAppearanceOverlay.Material3.Button" />
