@@ -8,6 +8,6 @@
     <activity
         android:id="@+id/secActivity"
         android:name="com.talco.brandnewapp.SecActivity"
-        android:label="activity_sec"
-        tools:layout="@layout/activity_sec" />
+        android:label="fragment_main_screen_fragment"
+        tools:layout="@layout/fragment_main_screen_fragment" />
 </navigation>
