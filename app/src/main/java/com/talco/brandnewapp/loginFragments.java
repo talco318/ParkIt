@@ -15,7 +15,7 @@ public class loginFragments extends Fragment {
         // Required empty public constructor
     }
 
-    public static loginFragments newInstance(String param1, String param2) {
+    public static loginFragments newInstance() {
         loginFragments fragment = new loginFragments();
         Bundle args = new Bundle();
         fragment.setArguments(args);
