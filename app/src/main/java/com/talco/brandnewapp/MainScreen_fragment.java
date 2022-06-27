@@ -1,10 +1,7 @@
 package com.talco.brandnewapp;
 
-import android.app.Activity;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +18,7 @@ public class MainScreen_fragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static MainScreen_fragment newInstance(String param1, String param2) {
+    public static MainScreen_fragment newInstance() {
         MainScreen_fragment fragment = new MainScreen_fragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -44,7 +41,7 @@ public class MainScreen_fragment extends Fragment {
         addParking_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Activity secActivity = (MainActivity) getActivity();
+                //Activity secActivity = (MainActivity) getActivity();
                 //logout func
             }
         });
