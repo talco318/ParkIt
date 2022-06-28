@@ -2,6 +2,8 @@ package com.talco.brandnewapp;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import android.widget.Button;
  * create an instance of this fragment.
  */
 public class MainScreen_fragment extends Fragment {
+
+
 
     public MainScreen_fragment() {
         // Required empty public constructor
@@ -28,6 +32,7 @@ public class MainScreen_fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("result", "main screen fragment on create ");
 
     }
 

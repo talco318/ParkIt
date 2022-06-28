@@ -2,6 +2,7 @@ package com.talco.brandnewapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity{
         mAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d("result", "main activity");
+
     }
 
 
@@ -49,7 +52,12 @@ public class MainActivity extends AppCompatActivity{
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(MainActivity.this,"Login successful!", Toast.LENGTH_LONG).show();
                             //added:
-                            setContentView(R.layout.activity_sec);
+                            //setContentView(R.layout.activity_sec);
+
+                            Log.d("result", "move _____________________________________________________________________");
+                            Navigation.findNavController(view).navigate(R.id.action_secFragment_to_secActivity2);
+
+
                             Log.d("result", "login done!");
                                 //Navigation.findNavController(view).navigate(R.id.action_secFragment_to_afterLoginFragment);
                         } else {
@@ -118,8 +126,8 @@ public class MainActivity extends AppCompatActivity{
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(MainActivity.this,"Register successful!", Toast.LENGTH_LONG).show();
                             writeFunc(name, phone, email);
-                            setContentView(R.layout.activity_sec);
-                            //Navigation.findNavController(view).navigate(R.id.action_thirdFragment_to_afterLoginFragment);
+                            //setContentView(R.layout.activity_sec);
+                            Navigation.findNavController(view).navigate(R.id.action_secFragment_to_secActivity2);
 
                         } else {
                             // If sign in fails, display a message to the user.
