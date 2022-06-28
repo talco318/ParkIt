@@ -25,10 +25,23 @@
         android:id="@+id/secFragment"
         android:name="com.talco.brandnewapp.loginFragments"
         android:label="fragment_sec"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_secFragment_to_secActivity2"
+            app:destination="@id/secActivity2" />
+    </fragment>
     <fragment
         android:id="@+id/thirdFragment"
         android:name="com.talco.brandnewapp.registerFragment"
         android:label="fragment_third"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_thirdFragment_to_secActivity2"
+            app:destination="@id/secActivity2" />
+    </fragment>
+    <activity
+        android:id="@+id/secActivity2"
+        android:name="com.talco.brandnewapp.SecActivity"
+        android:label="fragment_main_screen_fragment"
+        tools:layout="@layout/fragment_main_screen_fragment" />
 </navigation>
