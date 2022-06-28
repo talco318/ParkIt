@@ -4,6 +4,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,37 +23,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_maps);
+        Log.d("result", "map activity");
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         Intent i = getIntent();
-        String lat = i.getStringExtra("lat");
-        String lot = i.getStringExtra("lot");
-        String place = i.getStringExtra("KeyPlace");
+        Location location = (Location) i.getParcelableExtra("key");
+
+        LatLng sydney = new LatLng(Double.parseDouble(location.get_Latitude()), Double.parseDouble(location.get_Longitude()));
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
 
-        // Add a marker in Sydney and move the camera
-        LatLng israel = new LatLng(Double.parseDouble(lat), Double.parseDouble(lot));
-        mMap.addMarker(new MarkerOptions().position(israel).title("Your location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(israel));
+        Toast.makeText(this,location.get_Latitude()+" " +location.get_Longitude(), Toast.LENGTH_LONG).show();
     }
 }
