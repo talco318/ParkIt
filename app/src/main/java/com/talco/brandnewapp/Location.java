@@ -1,16 +1,15 @@
 package com.talco.brandnewapp;
 
-import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class location implements Parcelable {
+public class Location implements Parcelable {
 
 
     private String Latitude;
     private String Longitude;
 
-    public location(String x , String y)
+    public Location(String x , String y)
     {
 
         Latitude = x;
@@ -18,20 +17,20 @@ public class location implements Parcelable {
 
     }
 
-    protected location(Parcel in) {
+    protected Location(Parcel in) {
         Latitude = in.readString();
         Longitude = in.readString();
     }
 
-    public static final Creator<location> CREATOR = new Creator<location>() {
+    public static final Creator<Location> CREATOR = new Creator<Location>() {
         @Override
-        public location createFromParcel(Parcel in) {
-            return new location(in);
+        public Location createFromParcel(Parcel in) {
+            return new Location(in);
         }
 
         @Override
-        public location[] newArray(int size) {
-            return new location[size];
+        public Location[] newArray(int size) {
+            return new Location[size];
         }
     };
 
