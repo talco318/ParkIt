@@ -6,33 +6,52 @@ import android.os.Parcelable;
 
 public class location implements Parcelable {
 
+
     private String Latitude;
     private String Longitude;
 
+    public location(String x , String y)
+    {
 
-    public location(String x, String y){
         Latitude = x;
-        Longitude = y;
+        Longitude = y ;
 
     }
 
-
-    protected location(Parcel in){
+    protected location(Parcel in) {
         Latitude = in.readString();
         Longitude = in.readString();
     }
 
-    public static final Creator<Location> CREATOR = new Creator<Location>() {
+    public static final Creator<location> CREATOR = new Creator<location>() {
         @Override
-        public Location createFromParcel(Parcel in) {
-            return new Location(String.valueOf(in)); // needs to be in only
+        public location createFromParcel(Parcel in) {
+            return new location(in);
         }
 
         @Override
-        public Location[] newArray(int size) {
-            return new Location[size];
+        public location[] newArray(int size) {
+            return new location[size];
         }
     };
+
+    public String get_Latitude ()
+    {
+        return Latitude;
+    }
+
+    public String get_Longitude ()
+    {
+        return Longitude;
+    }
+    public void set_Latitude(String x)
+    {
+        Latitude = x;
+    }
+    public void set_Longitude(String y)
+    {
+        Longitude = y;
+    }
 
     @Override
     public int describeContents() {
