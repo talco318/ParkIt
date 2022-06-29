@@ -129,10 +129,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
         }
 
-        //LocationField.setText(fullname.toString());
         mMap.setMyLocationEnabled(true);
 
-        //Toast.makeText(this,location.get_Latitude()+" " +location.get_Longitude(), Toast.LENGTH_LONG).show();
     }
 
     @Override
