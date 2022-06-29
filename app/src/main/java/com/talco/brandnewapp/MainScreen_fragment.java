@@ -43,13 +43,13 @@ public class MainScreen_fragment extends Fragment {
 
         Button addParking_button = view.findViewById(R.id.add_parking_button);
 
-        addParking_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Activity secActivity = (MainActivity) getActivity();
-                //logout func
-            }
-        });
+//        addParking_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //Activity secActivity = (MainActivity) getActivity();
+//                //logout func
+//            }
+//        });
 
         return view;    }
 }

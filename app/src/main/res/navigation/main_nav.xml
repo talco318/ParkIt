@@ -27,8 +27,8 @@
         android:label="fragment_sec"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_secFragment_to_secActivity2"
-            app:destination="@id/secActivity2" />
+            android:id="@+id/action_login_to_maps"
+            app:destination="@id/maps_Activity" />
     </fragment>
     <fragment
         android:id="@+id/thirdFragment"
@@ -36,12 +36,12 @@
         android:label="fragment_third"
         tools:layout="@layout/fragment_register" >
         <action
-            android:id="@+id/action_thirdFragment_to_secActivity2"
-            app:destination="@id/secActivity2" />
+            android:id="@+id/action_register_to_maps"
+            app:destination="@id/maps_Activity" />
     </fragment>
     <activity
-        android:id="@+id/secActivity2"
+        android:id="@+id/maps_Activity"
         android:name="com.talco.brandnewapp.SecActivity"
-        android:label="fragment_main_screen_fragment"
-        tools:layout="@layout/fragment_main_screen_fragment" />
+        android:label="activity_maps"
+        tools:layout="@layout/activity_maps" />
 </navigation>
