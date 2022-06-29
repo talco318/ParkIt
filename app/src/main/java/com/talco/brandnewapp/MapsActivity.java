@@ -41,10 +41,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent i = getIntent();
         Location location = (Location) i.getParcelableExtra("key");
 
-        LatLng sydney = new LatLng(Double.parseDouble(location.get_Latitude()), Double.parseDouble(location.get_Longitude()));
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng currentLoc = new LatLng(Double.parseDouble(location.get_Latitude()), Double.parseDouble(location.get_Longitude()));
+        LatLng sec = new LatLng(32.073698, 34.781924); // this is a test
 
+        mMap.addMarker(new MarkerOptions().position(currentLoc).title("Your current location"));
+
+        mMap.addMarker(new MarkerOptions().position(sec).title("Your sec location"));
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLoc));
 
         Toast.makeText(this,location.get_Latitude()+" " +location.get_Longitude(), Toast.LENGTH_LONG).show();
     }
