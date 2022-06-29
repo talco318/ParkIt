@@ -3,7 +3,7 @@ package com.talco.brandnewapp;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Location implements Parcelable {
+public class Location implements Parcelable{
 
 
     private String Latitude;
