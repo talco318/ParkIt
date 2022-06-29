@@ -1,11 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapsActivity"
-    map:cameraTilt="30"
-    map:cameraZoom="17" />
+    android:orientation="vertical"
+    app:layoutDescription="@xml/activity_sec_scene"
+    tools:context=".SecActivity">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        app:cameraTilt="30"
+        app:cameraZoom="17"
+        tools:context=".MapsActivity" />
+
+    <TextView
+        android:id="@+id/placeNameTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="The parking found in:"
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:id="@+id/placeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Place_Name"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/add_parking_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:text="Add this parking" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/cancel_button"
+        android:layout_width="401dp"
+        android:layout_height="45dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:baselineAligned="false"
+        android:contentDescription="@android:string/cancel"
+        android:src="@drawable/back"
+        app:backgroundTint="#C50000"
+        app:fabCustomSize="45dp" />
+
+</LinearLayout>
