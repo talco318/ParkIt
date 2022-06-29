@@ -16,6 +16,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,9 +78,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         }
-
     }
 
+
+    public void onClickBtn(View v)
+    {
+        Intent i = getIntent();
+        Location addLoc = (Location) i.getParcelableExtra("key");
+        writeLoc(addLoc.get_Latitude(), addLoc.get_Longitude());
+        //Toast.makeText(this, "Clicked on Button", Toast.LENGTH_LONG).show();
+    }
 
 
     private void get_full(double latitude , double longitude) throws IOException {
@@ -98,8 +106,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         LocationField.setText(address+" "+ city  + " " );
 
-        //  addresses = geocoder.getFromLocationName("הר מירון 12",10);
-        //  addresses.get(0).getLatitude();
     }
 
 
@@ -141,7 +147,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent intent = new Intent(this, MapsActivity.class);
         String lat = location.getLatitude()+"";
         String lng =  location.getLongitude()+"";
-        int speed = (int) Math.ceil(location.getSpeed()*3.78571428571);
         com.talco.brandnewapp.Location location_xy = new com.talco.brandnewapp.Location(lat,lng);
 
         try {
@@ -170,10 +175,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void writeLoc(String lat, String longlat){
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("locations");
+        DatabaseReference myRef = database.getReference("locations/users");
         //get all data from the layout text
         Location l = new Location(lat, longlat);
         myRef.setValue(l);
+        Toast.makeText(this, "Location added!", Toast.LENGTH_LONG).show();
+
     }
 
 
