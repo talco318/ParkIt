@@ -86,7 +86,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent i = getIntent();
         Location addLoc = (Location) i.getParcelableExtra("key");
         writeLoc(addLoc.get_Latitude(), addLoc.get_Longitude());
-        //Toast.makeText(this, "Clicked on Button", Toast.LENGTH_LONG).show();
     }
 
 
@@ -175,7 +174,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void writeLoc(String lat, String longlat){
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("locations/users");
+        DatabaseReference myRef = database.getReference("locations/");
         //get all data from the layout text
         Location l = new Location(lat, longlat);
         myRef.setValue(l);
