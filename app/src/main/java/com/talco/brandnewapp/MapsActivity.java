@@ -25,6 +25,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.talco.brandnewapp.databinding.ActivityMapsBinding;
 
 import java.io.IOException;
@@ -125,6 +127,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         try {
 
             get_full(Double.parseDouble(location.get_Latitude()),Double.parseDouble(location.get_Longitude()));
+            //writeLoc(location.get_Latitude(), location.get_Longitude());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -163,4 +166,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Toast.makeText(this, "Turn on location services! ",
                 Toast.LENGTH_SHORT).show();
     }
+
+    public void writeLoc(String lat, String longlat){
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("locations");
+        //get all data from the layout text
+        Location l = new Location(lat, longlat);
+        myRef.setValue(l);
+    }
+
+
 }
