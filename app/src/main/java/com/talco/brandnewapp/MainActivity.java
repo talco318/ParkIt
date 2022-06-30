@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity{
                             Toast.makeText(MainActivity.this,"Register successful!", Toast.LENGTH_LONG).show();
                             writeFunc(name, phone, email);
                             //setContentView(R.layout.activity_sec);
-                            Navigation.findNavController(view).navigate(R.id.action_login_to_maps);
+                            Navigation.findNavController(view).navigate(R.id.action_register_to_maps);
 
                         } else {
                             // If sign in fails, display a message to the user.

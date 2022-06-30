@@ -26,6 +26,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.talco.brandnewapp.databinding.ActivityMapsBinding;
@@ -41,6 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private TextView LocationField;
     private LocationManager locationManager;
     private String provider;
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -166,9 +168,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void writeLoc(String lat, String longlat){
+        mAuth = FirebaseAuth.getInstance();
+        String id = mAuth.getCurrentUser().getUid();
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("locations/");
+        DatabaseReference myRef = database.getReference("User").child("User: " + id);
+        Log.d("result:" , myRef.toString());
         //get all data from the layout text
         Location l = new Location(lat, longlat);
         myRef.setValue(l);
