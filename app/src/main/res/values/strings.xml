@@ -25,5 +25,7 @@
     <string name="password_login">Password</string>
     <string name="login">Login</string>
     <string name="API_MAP_KEY">AIzaSyBpZNcyf2bQpGpjXjyLUm2ht5AEofEnXhU</string>
+    <string name="add_this_parking">Add this parking</string>
+    <string name="see_all_available_parkings_arount_you">See all available parkings arount you</string>
 
 </resources>
