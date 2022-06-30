@@ -8,12 +8,14 @@ public class Location implements Parcelable{
 
     private String Latitude;
     private String Longitude;
+    public static int id = 0;
 
     public Location(String x , String y)
     {
 
         Latitude = x;
         Longitude = y ;
+        id+=1;
 
     }
 
@@ -38,6 +40,14 @@ public class Location implements Parcelable{
     {
         return Latitude;
     }
+
+
+    public int get_id ()
+    {
+        return id;
+    }
+
+
 
     public String get_Longitude ()
     {

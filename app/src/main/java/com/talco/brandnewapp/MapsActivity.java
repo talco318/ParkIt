@@ -172,10 +172,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String id = mAuth.getCurrentUser().getUid();
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("User").child("User: " + id);
-        Log.d("result:" , myRef.toString());
+
         //get all data from the layout text
         Location l = new Location(lat, longlat);
+        DatabaseReference myRef = database.getReference("User").child("User: " + id).child("Location id: " +l.get_id());
+        Log.d("result:" , myRef.toString());
+
         myRef.setValue(l);
         Toast.makeText(this, "Location added!", Toast.LENGTH_LONG).show();
 
