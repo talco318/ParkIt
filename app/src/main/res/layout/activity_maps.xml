@@ -12,7 +12,7 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="0.5"
         app:cameraTilt="30"
         app:cameraZoom="17"
@@ -39,9 +39,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|center_vertical"
         android:backgroundTint="@color/default_blue"
-        android:textColor="@color/white"
-        android:text="Add this parking"
         android:onClick="onClickBtn"
+        android:text="@string/add_this_parking"
+        android:textColor="@color/white"
+        tools:ignore="OnClick" />
+
+    <Button
+        android:id="@+id/view_ParkingButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/see_all_available_parkings_arount_you"
         tools:ignore="OnClick" />
 
 </LinearLayout>
