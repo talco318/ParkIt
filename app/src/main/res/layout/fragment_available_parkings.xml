@@ -22,15 +22,15 @@
         android:text="@string/parking_locationTitle"
         android:textSize="20sp" />
 
+    <TableLayout
+        android:id="@+id/table_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" >
+    </TableLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/theParkingLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/the_location" />
-    </RelativeLayout>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
