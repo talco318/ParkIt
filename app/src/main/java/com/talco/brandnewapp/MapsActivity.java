@@ -134,21 +134,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (IOException e) {
             e.printStackTrace();
         }
-        addLocationsToMap(mMap);
+        //addLocationsToMap(mMap);
         mMap.setMyLocationEnabled(true);
 
     }
 
     public void addLocationsToMap(GoogleMap googleMap){
 
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        //get all data from the layout text
-        //Location l = new Location(lat, longlat);
-        DatabaseReference ref = database.getReference("Locations/");
-        //googleMap.addMarker(); //ad this location in "Locations"
-        Log.d("result:" , "this is a ref to string " + ref);
     }
 
 
