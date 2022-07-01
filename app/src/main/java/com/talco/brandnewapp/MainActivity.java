@@ -1,13 +1,15 @@
 package com.talco.brandnewapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.Navigation;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -15,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     @Override
@@ -28,19 +30,18 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-
     public void loginFunc(View view) {
         EditText email_text = findViewById(R.id.emailLoginTb);
         EditText pass_text = findViewById(R.id.tbxLoginPassword);
         String email = email_text.getText().toString();
         String password = pass_text.getText().toString();
 
-        if(password.isEmpty()||email.isEmpty()){
-            Toast.makeText(MainActivity.this,"Please fill the details below!", Toast.LENGTH_LONG).show();
+        if (password.isEmpty() || email.isEmpty()) {
+            Toast.makeText(MainActivity.this, "Please fill the details below!", Toast.LENGTH_LONG).show();
             return;
         }
 
-        Log.d("result" , email + " " + password);
+        Log.d("result", email + " " + password);
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity{
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(MainActivity.this,"Login successful!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_LONG).show();
                             //added:
                             //setContentView(R.layout.activity_sec);
 
@@ -57,10 +58,10 @@ public class MainActivity extends AppCompatActivity{
 
 
                             Log.d("result", "login done!");
-                                //Navigation.findNavController(view).navigate(R.id.action_secFragment_to_afterLoginFragment);
+                            //Navigation.findNavController(view).navigate(R.id.action_secFragment_to_afterLoginFragment);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(MainActivity.this,"Login failed! Try again", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, "Login failed! Try again", Toast.LENGTH_LONG).show();
 
                         }
 
@@ -68,19 +69,19 @@ public class MainActivity extends AppCompatActivity{
                 });
     }
 
-    public boolean passwordsValidation(String pass, String validPass){
-        if(pass.equals(validPass))
+    public boolean passwordsValidation(String pass, String validPass) {
+        if (pass.equals(validPass))
             return true;
         return false;
     }
 
 
-    public void writeFunc(String name, String phone, String email){
+    public void writeFunc(String name, String phone, String email) {
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("people");
         //get all data from the layout text
-        personData p = new personData(name,phone,email);
+        personData p = new personData(name, phone, email);
         myRef.setValue(p);
     }
 
@@ -100,18 +101,18 @@ public class MainActivity extends AppCompatActivity{
         String email = email_text.getText().toString();
         String password = pass_text.getText().toString();
 
-        if(phone.isEmpty()||name.isEmpty()||password.isEmpty()||email.isEmpty()||passwordValid.isEmpty()){
-            Toast.makeText(MainActivity.this,"Please fill all the form!", Toast.LENGTH_LONG).show();
+        if (phone.isEmpty() || name.isEmpty() || password.isEmpty() || email.isEmpty() || passwordValid.isEmpty()) {
+            Toast.makeText(MainActivity.this, "Please fill all the form!", Toast.LENGTH_LONG).show();
             return;
         }
 
-        if(!passwordsValidation(password, passwordValid)){
-            Toast.makeText(MainActivity.this,"Passwords didn't match!", Toast.LENGTH_LONG).show();
+        if (!passwordsValidation(password, passwordValid)) {
+            Toast.makeText(MainActivity.this, "Passwords didn't match!", Toast.LENGTH_LONG).show();
             return;
         }
 
 
-        Log.d("result" , email + " " + password);
+        Log.d("result", email + " " + password);
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -122,14 +123,14 @@ public class MainActivity extends AppCompatActivity{
 
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(MainActivity.this,"Register successful!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, "Register successful!", Toast.LENGTH_LONG).show();
                             writeFunc(name, phone, email);
                             //setContentView(R.layout.activity_sec);
                             Navigation.findNavController(view).navigate(R.id.action_register_to_maps);
 
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(MainActivity.this,"Register failed!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, "Register failed!", Toast.LENGTH_LONG).show();
 
                         }
                     }

@@ -1,8 +1,5 @@
 package com.talco.brandnewapp;
 
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +16,10 @@ import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -62,19 +63,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         LocationField = (TextView) findViewById(R.id.placeName);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if(provider!=null){
+        if (provider != null) {
 
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-            {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(MapsActivity.this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
-            }
-            else {
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            } else {
                 android.location.Location location = locationManager.getLastKnownLocation(provider);
 
                 // Initialize the location fields
                 if (location != null) {
-                    Log.d("result", "Provider "+ provider+  " has been selected.");
+                    Log.d("result", "Provider " + provider + " has been selected.");
                     onLocationChanged(location);
                 } else {
                     Log.d("result", "Location not available");
@@ -84,16 +83,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    public void onClickBtn(View v)
-    {
+    public void onClickBtn(View v) {
         Intent i = getIntent();
         Location addLoc = (Location) i.getParcelableExtra("key");
         writeLoc(addLoc.get_Latitude(), addLoc.get_Longitude());
     }
 
 
-
-    private void get_full(double latitude , double longitude) throws IOException {
+    private void get_full(double latitude, double longitude) throws IOException {
 
         Geocoder geocoder;
         List<Address> addresses;
@@ -101,7 +98,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
         String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
         String city = addresses.get(0).getLocality();
-        LocationField.setText(address+" "+ city  + " " );
+        LocationField.setText(address + " " + city + " ");
     }
 
 
@@ -122,7 +119,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //LocationField.setText("on map ready");
         try {
 
-            get_full(Double.parseDouble(location.get_Latitude()),Double.parseDouble(location.get_Longitude()));
+            get_full(Double.parseDouble(location.get_Latitude()), Double.parseDouble(location.get_Longitude()));
             //writeLoc(location.get_Latitude(), location.get_Longitude());
         } catch (IOException e) {
             e.printStackTrace();
@@ -132,7 +129,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public void addLocationsToMap(GoogleMap googleMap){
+    public void addLocationsToMap(GoogleMap googleMap) {
 
 
     }
@@ -141,14 +138,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onLocationChanged(@NonNull android.location.Location location) {
         Intent intent = new Intent(this, MapsActivity.class);
-        String lat = location.getLatitude()+"";
-        String lng =  location.getLongitude()+"";
-        com.talco.brandnewapp.Location location_xy = new com.talco.brandnewapp.Location(lat,lng);
+        String lat = location.getLatitude() + "";
+        String lng = location.getLongitude() + "";
+        com.talco.brandnewapp.Location location_xy = new com.talco.brandnewapp.Location(lat, lng);
 
         try {
 
-            get_full(location.getLatitude(),location.getLongitude());
-            intent.putExtra("key" , (Parcelable)location_xy );
+            get_full(location.getLatitude(), location.getLongitude());
+            intent.putExtra("key", (Parcelable) location_xy);
             startActivity(intent);
         } catch (IOException e) {
             e.printStackTrace();
@@ -168,7 +165,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Toast.LENGTH_SHORT).show();
     }
 
-    public void writeLoc(String lat, String longlat){
+    public void writeLoc(String lat, String longlat) {
         mAuth = FirebaseAuth.getInstance();
         String id = mAuth.getCurrentUser().getUid();
 
@@ -177,11 +174,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //get all data from the layout text
         Location l = new Location(lat, longlat);
-        DatabaseReference myRef = database.getReference("User").child("User id: " + id).child("Location id: " +l.get_id());
-        DatabaseReference publicRef = database.getReference("Locations").child("Location id: " +l.get_id());
+        DatabaseReference myRef = database.getReference("User").child("User id: " + id).child("Location id: " + l.get_id());
+        DatabaseReference publicRef = database.getReference("Locations").child("Location id: " + l.get_id());
 
-        Log.d("result:" , myRef.toString());
-        Log.d("result:" , publicRef.toString());
+        Log.d("result:", myRef.toString());
+        Log.d("result:", publicRef.toString());
 
         publicRef.setValue(l);
         myRef.setValue(l);
@@ -191,9 +188,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    public void addToView(){
+    public void addToView() {
         TableLayout stk = (TableLayout) findViewById(R.id.table_main);
 
-        }
+    }
 
 }

@@ -1,10 +1,5 @@
 package com.talco.brandnewapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -18,24 +13,23 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.firebase.auth.FirebaseAuth;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
 public class SecActivity extends AppCompatActivity implements LocationListener {
+    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
     private TextView LocationField;
     private LocationManager locationManager;
     private String provider;
-    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,18 +45,17 @@ public class SecActivity extends AppCompatActivity implements LocationListener {
         // default
         Criteria criteria = new Criteria();
         provider = locationManager.getBestProvider(criteria, false);
-        if(provider!=null){
+        if (provider != null) {
 
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(SecActivity.this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
-            }
-            else {
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            } else {
                 Location location = locationManager.getLastKnownLocation(provider);
 
                 // Initialize the location fields
                 if (location != null) {
-                    Log.d("result", "Provider "+ provider+  " has been selected.");
+                    Log.d("result", "Provider " + provider + " has been selected.");
                     onLocationChanged(location);
                 } else {
                     Log.d("result", "Location not available");
@@ -77,9 +70,8 @@ public class SecActivity extends AppCompatActivity implements LocationListener {
         super.onResume();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(SecActivity.this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
-        }
-        else {
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        } else {
 
             locationManager.requestLocationUpdates(provider, 200, 1, this);
         }
@@ -96,14 +88,14 @@ public class SecActivity extends AppCompatActivity implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         Intent intent = new Intent(this, MapsActivity.class);
-        String lat = location.getLatitude()+"";
-        String lng =  location.getLongitude()+"";
-        int speed = (int) Math.ceil(location.getSpeed()*3.78571428571);
-        com.talco.brandnewapp.Location location_xy = new com.talco.brandnewapp.Location(lat,lng);
+        String lat = location.getLatitude() + "";
+        String lng = location.getLongitude() + "";
+        int speed = (int) Math.ceil(location.getSpeed() * 3.78571428571);
+        com.talco.brandnewapp.Location location_xy = new com.talco.brandnewapp.Location(lat, lng);
 
         try {
-            get_full(location.getLatitude(),location.getLongitude());
-            intent.putExtra("key" , (Parcelable)location_xy );
+            get_full(location.getLatitude(), location.getLongitude());
+            intent.putExtra("key", (Parcelable) location_xy);
             startActivity(intent);
         } catch (IOException e) {
             e.printStackTrace();
@@ -111,7 +103,7 @@ public class SecActivity extends AppCompatActivity implements LocationListener {
 
     }
 
-    private void get_full(double latitude , double longitude) throws IOException {
+    private void get_full(double latitude, double longitude) throws IOException {
 
         Geocoder geocoder;
         List<Address> addresses;
