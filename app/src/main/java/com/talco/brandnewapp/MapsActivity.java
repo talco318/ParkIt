@@ -3,15 +3,10 @@ package com.talco.brandnewapp;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.Navigation;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -20,11 +15,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +54,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
         Criteria criteria = new Criteria();
         //provider = locationManager.getBestProvider(criteria, false);
@@ -111,7 +104,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
         String city = addresses.get(0).getLocality();
         //String state = addresses.get(0).getAdminArea();
-        String country = addresses.get(0).getCountryName();
+        //String country = addresses.get(0).getCountryName();
         //String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
 
         LocationField.setText(address+" "+ city  + " " );
@@ -120,7 +113,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
         Intent i = getIntent();
         Location location = (Location) i.getParcelableExtra("key");
@@ -155,7 +148,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Location l = new Location(lat, longlat);
         DatabaseReference ref = database.getReference("Locations/");
         //googleMap.addMarker(); //ad this location in "Locations"
-        Log.d("result:" , "this is a ref to string " + ref.toString());
+        Log.d("result:" , "this is a ref to string " + ref);
     }
 
 
