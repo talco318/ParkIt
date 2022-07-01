@@ -111,7 +111,6 @@
             android:autofillHints="phone"
             android:hint="Phone number"
             android:inputType="phone"
-            android:minHeight="28dp"
             android:text=""
             android:textSize="24sp"
             tools:ignore="TouchTargetSizeCheck" />
