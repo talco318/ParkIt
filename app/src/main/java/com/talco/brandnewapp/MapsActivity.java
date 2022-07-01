@@ -83,6 +83,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         }
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference locNumberRef = database.getReference("Location number");
+        locNumberRef.setValue(0);
+
+
     }
 
 
@@ -140,6 +145,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(third).title("Your third location"));
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+
         DatabaseReference locNumberRef = database.getReference("Location number");
 
         DatabaseReference locationsRef = database.getReference("Locations");
