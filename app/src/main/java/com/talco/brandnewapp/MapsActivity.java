@@ -36,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.talco.brandnewapp.databinding.ActivityMapsBinding;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -48,8 +49,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String provider;
     private FirebaseAuth mAuth;
     public int locNumber;
-    public String lat=null;
-    public String lngLat = null;
+    ArrayList<Location> locsToMap = new ArrayList<Location>(); // Create an ArrayList object
+
     public Location locToMap;
 
     @Override
@@ -126,8 +127,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-
-        //LocationField.setText("on map ready");
         try {
 
             get_full(Double.parseDouble(location.get_Latitude()), Double.parseDouble(location.get_Longitude()));
@@ -137,29 +136,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         addLocationsToMap(mMap);
         mMap.setMyLocationEnabled(true);
-
     }
 
     public void addLocationsToMap(GoogleMap googleMap) {
         int locNum = 0;
         //hard codded:
         LatLng sec = new LatLng(32.073698, 34.781924); // this is a test
-        LatLng third = new LatLng(32.095280, 34.871420); // this is a test
         mMap.addMarker(new MarkerOptions().position(sec).title("Your sec location"));
-        mMap.addMarker(new MarkerOptions().position(third).title("Your third location"));
+
+
+        //LatLng third = new LatLng(32.095280, 34.871420); // this is a test
+        //mMap.addMarker(new MarkerOptions().position(third).title("Your third location"));
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference locNumberRef = database.getReference("Location number");
-
-        DatabaseReference locationsRef = database.getReference("Locations").child("Location");
-
 
         locNumberRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int locNum = (int)snapshot.getValue(int.class);
-                Log.d("result:", "locNum is: " + locNum);
-                //locToMap = locFromDB();
+                locNumber = locNum;
+                Log.d("result:", "locNum is: " + locNumber);
+                locFromDB();
+                //TODO: Add the locations from locsToMap to the map!
 
             }
 
@@ -169,31 +168,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+
+
+
+        //place the locations from the db on the map:
+        for(int i=0; i<locsToMap.size(); i++){
+            LatLng currentLoc = new LatLng(Double.parseDouble(locToMap.get_Latitude()), Double.parseDouble(locToMap.get_Longitude()));
+            googleMap.addMarker(new MarkerOptions().position(currentLoc).title("loc from db"));
+            Log.d("result:", "i is: " + i + " location added.");
+
+        }
+
     }
 
-    public Location locFromDB(){
-
+    public void locFromDB(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference locationsRef = database.getReference("Locations").child("Location");
+        DatabaseReference locationsRef = database.getReference("Locations");
+
         locationsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Location loc = (Location) snapshot.getValue(Location.class);
-                Log.d("result:", "loc info is: " + loc.get_Longitude());
-                lat = loc.get_Latitude();
-                lngLat = loc.get_Longitude();
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    Location loc = snap.getValue(Location.class);
+                    Log.d("result:", "loc info is: " + loc.toString()+ " lat is: " + loc.get_Latitude()+ " lnglat: "+ loc.get_Longitude());
+                    locsToMap.add(loc);
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("result:", "Database error!");
 
             }
         });
-
-        Location reLoc = new Location(lat, lngLat);
-        Log.d("result:", "loc info is: " + reLoc.toString());
-        return reLoc;
-
     }
 
 
@@ -237,7 +244,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //get all data from the layout text
         Location l = new Location(lat, longlat);
         DatabaseReference myRef = database.getReference("User").child("User id: " + id).child("Location: ");
-        DatabaseReference publicRef = database.getReference("Locations").child("Location");
+        DatabaseReference publicRef = database.getReference("Locations").child(""+l.get_id());
         DatabaseReference locNumberRef = database.getReference("Location number");
 
         Log.d("result:", myRef.toString());
