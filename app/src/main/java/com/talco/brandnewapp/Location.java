@@ -29,11 +29,8 @@ public class Location implements Parcelable {
 
     }
     public Location() {
-
         Latitude = null;
         Longitude = null;
-        id++;
-
     }
 
     protected Location(Parcel in) {
