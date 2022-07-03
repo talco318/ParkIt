@@ -28,6 +28,13 @@ public class Location implements Parcelable {
         id++;
 
     }
+    public Location() {
+
+        Latitude = null;
+        Longitude = null;
+        id++;
+
+    }
 
     protected Location(Parcel in) {
         Latitude = in.readString();
