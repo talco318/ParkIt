@@ -49,7 +49,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String provider;
     private FirebaseAuth mAuth;
     public int locNumber;
-    ArrayList<Location> locsToMap = new ArrayList<Location>(); // Create an ArrayList object
+    ArrayList<Location> locsToMap; // Create an ArrayList object
 
     public Location locToMap;
 
@@ -57,6 +57,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        locsToMap = new ArrayList<Location>(); // Create an ArrayList object
+
         Log.d("result", "map activity");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -134,16 +136,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (IOException e) {
             e.printStackTrace();
         }
-        addLocationsToMap(mMap);
+        addLocationsToMap(mMap); //read from db and marker them on map
         mMap.setMyLocationEnabled(true);
     }
 
     public void addLocationsToMap(GoogleMap googleMap) {
         int locNum = 0;
         //hard codded:
-        LatLng sec = new LatLng(32.073698, 34.781924); // this is a test
-        mMap.addMarker(new MarkerOptions().position(sec).title("Your sec location"));
-
+        //LatLng sec = new LatLng(32.073698, 34.781924); // this is a test
+        //mMap.addMarker(new MarkerOptions().position(sec).title("Your sec location"));
 
         //LatLng third = new LatLng(32.095280, 34.871420); // this is a test
         //mMap.addMarker(new MarkerOptions().position(third).title("Your third location"));
@@ -157,8 +158,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 int locNum = (int)snapshot.getValue(int.class);
                 locNumber = locNum;
                 Log.d("result:", "locNum is: " + locNumber);
-                locFromDB();
+                readLocsFromDB(); // read from db and add them to arrayList
                 //TODO: Add the locations from locsToMap to the map!
+                //locateLocs();
 
             }
 
@@ -168,20 +170,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-
-
-
-        //place the locations from the db on the map:
-        for(int i=0; i<locsToMap.size(); i++){
-            LatLng currentLoc = new LatLng(Double.parseDouble(locToMap.get_Latitude()), Double.parseDouble(locToMap.get_Longitude()));
-            googleMap.addMarker(new MarkerOptions().position(currentLoc).title("loc from db"));
-            Log.d("result:", "i is: " + i + " location added.");
-
-        }
-
     }
 
-    public void locFromDB(){
+    public void locateLocs(){
+
+        //place the locations from the db on the map:
+        for(int i=0; i<locNumber; i++){
+            LatLng currentLoc = new LatLng(Double.parseDouble(locsToMap.get(i).get_Latitude()), Double.parseDouble(locsToMap.get(i).get_Longitude()));
+            mMap.addMarker(new MarkerOptions().position(currentLoc).title("loc from db"));
+            Log.d("result:", "i is: " + i + " location added.");
+        }
+    }
+
+
+    public void readLocsFromDB(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference locationsRef = database.getReference("Locations");
 
@@ -212,7 +214,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         com.talco.brandnewapp.Location location_xy = new com.talco.brandnewapp.Location(lat, lng);
 
         try {
-
             get_full(location.getLatitude(), location.getLongitude());
             intent.putExtra("key", (Parcelable) location_xy);
             startActivity(intent);
