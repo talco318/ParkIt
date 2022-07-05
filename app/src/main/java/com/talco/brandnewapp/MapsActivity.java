@@ -116,6 +116,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+    private String get_full_for_table(double latitude, double longitude) throws IOException {
+        StringBuffer fullstring=null;
+        Geocoder geocoder;
+        List<Address> addresses;
+        geocoder = new Geocoder(this, Locale.getDefault());
+        addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+        String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+        String city = addresses.get(0).getLocality();
+        fullstring.append(address + " " + city + " ");
+        return fullstring.toString();
+    }
+
+
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
@@ -261,7 +274,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     public void addToView() {
-        TableLayout stk = (TableLayout) findViewById(R.id.table_main);
+        TableLayout stk = (TableLayout) findViewById(R.id.tableLayout);
+        for(int i=0; i<locsToMap.size(); i++){
+
+        }
 
     }
 
