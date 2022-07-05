@@ -257,7 +257,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //get all data from the layout text
         Location l = new Location(lat, longlat);
-        DatabaseReference myRef = database.getReference("User").child("User id: " + id).child("Location: ");
+        DatabaseReference myRef = database.getReference("User").child("User id: " + id).child("Location "+ l.get_id());
         DatabaseReference publicRef = database.getReference("Locations").child(""+l.get_id());
         DatabaseReference locNumberRef = database.getReference("Location number");
 
