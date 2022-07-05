@@ -143,7 +143,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
         try {
-
             get_full(Double.parseDouble(location.get_Latitude()), Double.parseDouble(location.get_Longitude()));
             //writeLoc(location.get_Latitude(), location.get_Longitude());
         } catch (IOException e) {
@@ -152,6 +151,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         addLocationsToMap(mMap); //read from db and marker them on map
         mMap.setMyLocationEnabled(true);
     }
+
+
 
     public void addLocationsToMap(GoogleMap googleMap) {
         int locNum = 0;
@@ -173,7 +174,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("result:", "locNum is: " + locNumber);
                 readLocsFromDB(); // read from db and add them to arrayList
                 //TODO: Add the locations from locsToMap to the map!
-                //locateLocs();
+                locateLocs();
 
             }
 
@@ -190,8 +191,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //place the locations from the db on the map:
         for(int i=0; i<locNumber; i++){
             LatLng currentLoc = new LatLng(Double.parseDouble(locsToMap.get(i).get_Latitude()), Double.parseDouble(locsToMap.get(i).get_Longitude()));
-            mMap.addMarker(new MarkerOptions().position(currentLoc).title("loc from db"));
+            this.mMap.addMarker(new MarkerOptions().position(currentLoc).title("loc from db"));
             Log.d("result:", "i is: " + i + " location added.");
+
         }
     }
 
@@ -204,6 +206,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snap : snapshot.getChildren()){
+
                     Location loc = snap.getValue(Location.class);
                     Log.d("result:", "loc info is: " + loc.toString()+ " lat is: " + loc.get_Latitude()+ " lnglat: "+ loc.get_Longitude());
                     locsToMap.add(loc);
