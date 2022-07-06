@@ -39,7 +39,8 @@
             android:hint="@string/email_address"
             android:autofillHints="emailAddress"
             android:inputType="textEmailAddress"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:background="@color/gray"/>
 
         <TextView
             android:id="@+id/passTitle"
@@ -61,7 +62,8 @@
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:text=""
-            android:textColorHint="#757575" />
+            android:textColorHint="#757575"
+            android:background="@color/gray"/>
 
         <Button
             android:id="@+id/loginButton"

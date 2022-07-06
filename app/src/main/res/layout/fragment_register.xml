@@ -24,7 +24,7 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="Welcome to register page"
             android:textSize="30sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/emailTitle"
@@ -44,9 +44,10 @@
             android:hint="Email address"
             android:autofillHints="emailAddress"
             android:inputType="textEmailAddress"
-            android:minHeight="28dp"
+            android:minHeight="48dp"
             android:textSize="24sp"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck"
+            android:background="@color/gray"/>
 
         <TextView
             android:id="@+id/passTitle"
@@ -66,10 +67,11 @@
             android:ems="10"
             android:hint="Enter password"
             android:inputType="textPassword"
-            android:minHeight="28dp"
+            android:minHeight="48dp"
             android:text=""
             android:textSize="24sp"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck"
+            android:background="@color/gray"/>
 
         <TextView
             android:id="@+id/passValidation"
@@ -89,9 +91,10 @@
             android:autofillHints="password"
             android:hint="And again.."
             android:inputType="textPassword"
-            android:minHeight="28dp"
+            android:minHeight="48dp"
             android:text=""
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:background="@color/gray"/>
 
         <TextView
             android:id="@+id/phoneTitle"
@@ -113,7 +116,9 @@
             android:inputType="phone"
             android:text=""
             android:textSize="24sp"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:minHeight="48dp"
+            tools:ignore="TouchTargetSizeCheck"
+            android:background="@color/gray"/>
 
 
         <TextView
@@ -134,10 +139,11 @@
             android:hint="Full name"
             android:autofillHints="name"
             android:inputType="textPersonName"
-            android:minHeight="28dp"
+            android:minHeight="48dp"
             android:text=""
             android:textSize="24sp"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck"
+            android:background="@color/gray"/>
 
 
         <Button
