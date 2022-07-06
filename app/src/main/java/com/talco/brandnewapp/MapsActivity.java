@@ -42,32 +42,26 @@ import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
+    public int locNumber;
+    public Location locToMap;
+    ArrayList<Location> locsToMap; // Create an ArrayList object
+    //database
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference locNumberRef = database.getReference("Location number");
+    DatabaseReference locationsRef = database.getReference("Locations");
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     private TextView LocationField;
     private LocationManager locationManager;
     private String provider;
     private FirebaseAuth mAuth;
-    public int locNumber;
-    ArrayList<Location> locsToMap; // Create an ArrayList object
-
-
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference locNumberRef = database.getReference("Location number");
-    DatabaseReference locationsRef = database.getReference("Locations");
-
-
-
-    public Location locToMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         locsToMap = new ArrayList<Location>(); // Create an ArrayList object
-
         Log.d("result", "map activity");
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -75,7 +69,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         Criteria criteria = new Criteria();
         //provider = locationManager.getBestProvider(criteria, false);
-
 
         LocationField = (TextView) findViewById(R.id.placeName);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -89,16 +82,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 // Initialize the location fields
                 if (location != null) {
-                    Log.d("result", "Provider " + provider + " has been selected.");
                     onLocationChanged(location);
                 } else {
                     Log.d("result", "Location not available");
                 }
             }
         }
-
         locNumberRef.setValue(0);
-
 
     }
 
@@ -123,7 +113,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private String get_full_for_table(double latitude, double longitude) throws IOException {
-        StringBuffer fullstring=null;
+        StringBuffer fullstring = null;
         Geocoder geocoder;
         List<Address> addresses;
         geocoder = new Geocoder(this, Locale.getDefault());
@@ -159,7 +149,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-
     public void addLocationsToMap(GoogleMap googleMap) {
         int locNum = 0;
         //hard codded:
@@ -170,11 +159,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //mMap.addMarker(new MarkerOptions().position(third).title("Your third location"));
 
 
-
         locNumberRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int locNum = (int)snapshot.getValue(int.class);
+                int locNum = (int) snapshot.getValue(int.class);
                 locNumber = locNum;
                 Log.d("result:", "locNum is: " + locNumber);
                 readLocsFromDB(); // read from db and add them to arrayList
@@ -191,10 +179,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public void locateLocs(){
+    public void locateLocs() {
 
         //place the locations from the db on the map:
-        for(int i=0; i<locNumber; i++){
+        for (int i = 0; i < locNumber; i++) {
             LatLng currentLoc = new LatLng(Double.parseDouble(locsToMap.get(i).get_Latitude()), Double.parseDouble(locsToMap.get(i).get_Longitude()));
             this.mMap.addMarker(new MarkerOptions().position(currentLoc).title("loc from db"));
             Log.d("result:", "i is: " + i + " location added.");
@@ -203,16 +191,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    public void readLocsFromDB(){
+    public void readLocsFromDB() {
 
 
         locationsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snap : snapshot.getChildren()){
+                for (DataSnapshot snap : snapshot.getChildren()) {
 
                     Location loc = snap.getValue(Location.class);
-                    Log.d("result:", "loc info is: " + loc.toString()+ " lat is: " + loc.get_Latitude()+ " lnglat: "+ loc.get_Longitude());
+                    Log.d("result:", "loc info is: " + loc.toString() + " lat is: " + loc.get_Latitude() + " lnglat: " + loc.get_Longitude());
                     locsToMap.add(loc);
                 }
             }
@@ -261,12 +249,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //get all data from the layout text
         Location l = new Location(lat, longlat);
-        DatabaseReference myRef = database.getReference("User").child("User id: " + id).child("Location "+ l.get_id());
-        DatabaseReference publicRef = database.getReference("Locations").child(""+l.get_id());
+        DatabaseReference myRef = database.getReference("User").child("User id: " + id).child("Location " + l.get_id());
+        DatabaseReference publicRef = database.getReference("Locations").child("" + l.get_id());
         DatabaseReference locNumberRef = database.getReference("Location number");
 
-        Log.d("result:", myRef.toString());
-        Log.d("result:", publicRef.toString());
 
         publicRef.setValue(l);
         myRef.setValue(l);
@@ -279,7 +265,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void addToView() {
         TableLayout stk = (TableLayout) findViewById(R.id.tableLayout);
-        for(int i=0; i<locsToMap.size(); i++){
+        for (int i = 0; i < locsToMap.size(); i++) {
 
         }
 
