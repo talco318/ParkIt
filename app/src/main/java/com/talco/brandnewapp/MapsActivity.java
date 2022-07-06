@@ -51,6 +51,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public int locNumber;
     ArrayList<Location> locsToMap; // Create an ArrayList object
 
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference locNumberRef = database.getReference("Location number");
+    DatabaseReference locationsRef = database.getReference("Locations");
+
+
+
     public Location locToMap;
 
     @Override
@@ -89,8 +96,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         }
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference locNumberRef = database.getReference("Location number");
+
         locNumberRef.setValue(0);
 
 
@@ -163,8 +169,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //LatLng third = new LatLng(32.095280, 34.871420); // this is a test
         //mMap.addMarker(new MarkerOptions().position(third).title("Your third location"));
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference locNumberRef = database.getReference("Location number");
+
 
         locNumberRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -199,8 +204,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     public void readLocsFromDB(){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference locationsRef = database.getReference("Locations");
+
 
         locationsRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -254,9 +258,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void writeLoc(String lat, String longlat) {
         mAuth = FirebaseAuth.getInstance();
         String id = mAuth.getCurrentUser().getUid();
-
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         //get all data from the layout text
         Location l = new Location(lat, longlat);
