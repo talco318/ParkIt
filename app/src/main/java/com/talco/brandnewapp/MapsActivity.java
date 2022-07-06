@@ -39,11 +39,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
     public int locNumber;
-    public Location locToMap;
     ArrayList<Location> locsToMap; // Create an ArrayList object
     //database
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -60,7 +60,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        locsToMap = new ArrayList<Location>(); // Create an ArrayList object
+        locsToMap = new ArrayList<>(); // Create an ArrayList object
         Log.d("result", "map activity");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -113,14 +113,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private String get_full_for_table(double latitude, double longitude) throws IOException {
-        StringBuffer fullstring = null;
+        StringBuilder fullstring = null;
         Geocoder geocoder;
         List<Address> addresses;
         geocoder = new Geocoder(this, Locale.getDefault());
         addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
         String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
         String city = addresses.get(0).getLocality();
-        fullstring.append(address + " " + city + " ");
+        assert fullstring != null;
+        fullstring.append(address).append(" ").append(city).append(" ");
         return fullstring.toString();
     }
 
@@ -200,6 +201,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 for (DataSnapshot snap : snapshot.getChildren()) {
 
                     Location loc = snap.getValue(Location.class);
+                    assert loc != null;
                     Log.d("result:", "loc info is: " + loc.toString() + " lat is: " + loc.get_Latitude() + " lnglat: " + loc.get_Longitude());
                     locsToMap.add(loc);
                 }
@@ -245,7 +247,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void writeLoc(String lat, String longlat) {
         mAuth = FirebaseAuth.getInstance();
-        String id = mAuth.getCurrentUser().getUid();
+        String id = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
         //get all data from the layout text
         Location l = new Location(lat, longlat);
