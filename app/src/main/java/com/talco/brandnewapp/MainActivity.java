@@ -76,15 +76,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void writeFunc(String name, String phone, String email) {
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("people");
-        //get all data from the layout text
-        personData p = new personData(name, phone, email);
-        myRef.setValue(p);
-    }
-
 
     public void RegisterFunc(View view) {
 
@@ -124,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(MainActivity.this, "Register successful!", Toast.LENGTH_LONG).show();
-                            writeFunc(name, phone, email);
                             //setContentView(R.layout.activity_sec);
                             Navigation.findNavController(view).navigate(R.id.action_register_to_maps);
 
