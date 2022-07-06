@@ -26,6 +26,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -45,6 +46,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public int locNumber;
     ArrayList<Location> locsToMap; // Create an ArrayList object
+    ArrayList<Marker> markerArrayList;
     //database
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference locNumberRef = database.getReference("Location number");
@@ -61,6 +63,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         locsToMap = new ArrayList<>(); // Create an ArrayList object
+        markerArrayList = new ArrayList<>();
+
         Log.d("result", "map activity");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -128,13 +132,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
+        Marker marker;
         mMap = googleMap;
+        mMap.clear();
         Intent i = getIntent();
         Location location = (Location) i.getParcelableExtra("key");
         LatLng currentLoc = new LatLng(Double.parseDouble(location.get_Latitude()), Double.parseDouble(location.get_Longitude()));
         //LatLng sec = new LatLng(32.073698, 34.781924); // this is a test
-        mMap.addMarker(new MarkerOptions().position(currentLoc).title("Your current location"));
+        //mMap.addMarker(new MarkerOptions().position(currentLoc).title("Your current location"));
         //mMap.addMarker(new MarkerOptions().position(sec).title("Your sec location"));
+
+        MarkerOptions userIndicator = new MarkerOptions()
+                .position(new LatLng(Double.parseDouble(location.get_Latitude()), Double.parseDouble(location.get_Longitude())))
+                .title("You are here")
+                .snippet("lat:" + Double.parseDouble(location.get_Latitude()) + ", lng:" +  Double.parseDouble(location.get_Longitude()));
+        marker = googleMap.addMarker(userIndicator);
+        markerArrayList.add(marker);
+
+
+
         mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLoc));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
@@ -204,6 +220,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     assert loc != null;
                     Log.d("result:", "loc info is: " + loc.toString() + " lat is: " + loc.get_Latitude() + " lnglat: " + loc.get_Longitude());
                     locsToMap.add(loc);
+
                 }
             }
 
