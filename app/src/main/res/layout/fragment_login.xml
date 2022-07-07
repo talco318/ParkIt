@@ -18,7 +18,7 @@
         android:gravity="center_horizontal|center_vertical"
         android:hint="@string/welcome_to_login_page"
         android:text="@string/welcome_to_login_page"
-        android:textColor="#DEDEDE"
+        android:textColor="#FFFFFF"
         android:textSize="30sp" />
 
     <TextView
@@ -69,6 +69,7 @@
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:text=""
+        android:textColor="#FFFFFFFF"
         android:background="@drawable/edittextstyle"
         android:textColorHint="@color/gray" />
 
