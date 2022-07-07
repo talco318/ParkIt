@@ -10,6 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="#2D2D2D"
         android:orientation="vertical">
 
         <TextView
@@ -19,6 +20,7 @@
             android:layout_weight="0.8"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/welcome_to_login_page"
+            android:background="#2D2D2D"
             android:textSize="30sp" />
 
         <TextView
@@ -28,7 +30,9 @@
             android:layout_weight="1"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/email"
-            android:textSize="28sp" />
+            android:textSize="28sp"
+            android:textColorHint="#DEDEDE"
+            android:background="#2D2D2D"/>
 
         <EditText
             android:id="@+id/emailLoginTb"
@@ -40,7 +44,8 @@
             android:autofillHints="emailAddress"
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
-            android:background="@color/gray"/>
+            android:textColorHint="#DEDEDE"
+            android:background="#2D2D2D"/>
 
         <TextView
             android:id="@+id/passTitle"
@@ -49,7 +54,9 @@
             android:layout_weight="1"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/password"
-            android:textSize="28sp" />
+            android:textSize="28sp"
+            android:textColorHint="#DEDEDE"
+            android:background="#2D2D2D"/>
 
         <EditText
             android:id="@+id/tbxLoginPassword"
@@ -62,8 +69,8 @@
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:text=""
-            android:textColorHint="#757575"
-            android:background="@color/gray"/>
+            android:textColorHint="#DEDEDE"
+            android:background="#2D2D2D"/>
 
         <Button
             android:id="@+id/loginButton"
@@ -72,9 +79,9 @@
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
             android:layout_weight="0.8"
-            android:backgroundTint="#0271C0"
+            android:backgroundTint="#F6D139"
             android:text="@string/login"
-            android:textColor="@color/white"
+            android:textColor="#2D2D2D"
             android:layout_gravity="center_vertical|center_horizontal"
             android:theme="@style/ShapeAppearanceOverlay.Material3.Button" />
 
