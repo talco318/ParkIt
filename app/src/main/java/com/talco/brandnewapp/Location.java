@@ -28,6 +28,14 @@ public class Location implements Parcelable {
         id++;
 
     }
+    public Location(String x, String y, int i) {
+
+        Latitude = x;
+        Longitude = y;
+        id = i+1;
+
+    }
+
     public Location() {
         Latitude = null;
         Longitude = null;
