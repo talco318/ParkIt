@@ -288,13 +288,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //get all data from the layout text
         Location l = new Location(lat, longlat);
-        DatabaseReference myRef = database.getReference("User").child("User id: " + id).child("Location " + l.get_id());
-        DatabaseReference publicRef = database.getReference("Locations").child("" + l.get_id());
+        DatabaseReference myRef = database.getReference("User").child("User id: " + id).child("Location " + (locNumber+1));
+
+        DatabaseReference publicRef = database.getReference("Locations").child("" + (locNumber+1));
         DatabaseReference locNumberRef = database.getReference("Location number");
 
 
         publicRef.setValue(l);
         myRef.setValue(l);
+        Toast.makeText(this, "location " + (locNumber+1) + " added.",
+                Toast.LENGTH_SHORT).show();
         locNumberRef.setValue(l.get_id());
         //addToView();
         Toast.makeText(this, "Location added!", Toast.LENGTH_LONG).show();
