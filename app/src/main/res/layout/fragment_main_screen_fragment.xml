@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layoutDescription="@xml/activity_sec_scene"
-    tools:context=".SecActivity">
+    tools:context=".SecActivity"
+    android:background="#2A2625">
 
 
     <TextView
