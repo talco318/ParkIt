@@ -23,8 +23,9 @@
             android:layout_weight="1"
             android:gravity="center_horizontal|center_vertical"
             android:text="Welcome to register page"
-            android:textSize="30sp"
-            android:textColor="@color/black" />
+            android:textColor="#DEDEDE"
+            android:background="#2D2D2D"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/emailTitle"
@@ -33,6 +34,8 @@
             android:layout_weight="1"
             android:gravity="center_horizontal|center_vertical"
             android:text="Email:"
+            android:textColor="#DEDEDE"
+            android:background="#2D2D2D"
             android:textSize="24sp" />
 
         <EditText
@@ -47,7 +50,8 @@
             android:minHeight="48dp"
             android:textSize="24sp"
             tools:ignore="TouchTargetSizeCheck"
-            android:background="@color/gray"/>
+            android:textColor="#DEDEDE"
+            android:background="#2D2D2D"/>
 
         <TextView
             android:id="@+id/passTitle"
@@ -56,6 +60,7 @@
             android:layout_weight="1"
             android:gravity="center_horizontal|center_vertical"
             android:text="Password:"
+            android:background="#2D2D2D"
             android:textSize="24sp" />
 
         <EditText
@@ -71,7 +76,8 @@
             android:text=""
             android:textSize="24sp"
             tools:ignore="TouchTargetSizeCheck"
-            android:background="@color/gray"/>
+            android:textColor="#DEDEDE"
+            android:background="#2D2D2D"/>
 
         <TextView
             android:id="@+id/passValidation"
@@ -80,7 +86,9 @@
             android:layout_weight="1"
             android:gravity="center_horizontal|center_vertical"
             android:text="Password validation:"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="#DEDEDE"
+            android:background="#2D2D2D"/>
 
         <EditText
             android:id="@+id/tbPasswordValidation"
@@ -94,7 +102,8 @@
             android:minHeight="48dp"
             android:text=""
             android:textSize="24sp"
-            android:background="@color/gray"/>
+            android:textColor="#DEDEDE"
+            android:background="#2D2D2D"/>
 
         <TextView
             android:id="@+id/phoneTitle"
@@ -103,6 +112,8 @@
             android:layout_weight="1"
             android:gravity="center_horizontal|center_vertical"
             android:text="Phone Number:"
+            android:textColor="#DEDEDE"
+            android:background="#2D2D2D"
             android:textSize="24sp" />
 
         <EditText
@@ -118,7 +129,8 @@
             android:textSize="24sp"
             android:minHeight="48dp"
             tools:ignore="TouchTargetSizeCheck"
-            android:background="@color/gray"/>
+            android:textColor="#DEDEDE"
+            android:background="#2D2D2D"/>
 
 
         <TextView
@@ -128,6 +140,8 @@
             android:layout_weight="1"
             android:gravity="center_horizontal|center_vertical"
             android:text="Full name:"
+            android:textColor="#DEDEDE"
+            android:background="#2D2D2D"
             android:textSize="24sp" />
 
         <EditText
@@ -143,7 +157,8 @@
             android:text=""
             android:textSize="24sp"
             tools:ignore="TouchTargetSizeCheck"
-            android:background="@color/gray"/>
+            android:textColor="#DEDEDE"
+            android:background="#2D2D2D"/>
 
 
         <Button
@@ -153,10 +168,11 @@
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
             android:layout_weight="1"
-            android:backgroundTint="#0271C0"
+            android:backgroundTint="#F6D139"
             android:text="Register"
             android:layout_gravity="center_vertical|center_horizontal"
             android:textColor="@color/white"
+
             android:theme="@style/ShapeAppearanceOverlay.Material3.Button" />
 
     </LinearLayout>
