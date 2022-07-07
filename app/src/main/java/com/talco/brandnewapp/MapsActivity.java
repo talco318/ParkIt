@@ -45,12 +45,16 @@ import java.util.Objects;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
     public int locNumber;
+    public int counterLocsFromDB ;
+
     ArrayList<Location> locsToMap; // Create an ArrayList object
     ArrayList<Marker> markerArrayList;
     //database
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference locNumberRef = database.getReference("Location number");
     DatabaseReference locationsRef = database.getReference("Locations");
+    DatabaseReference publicRef = database.getReference();
+
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     private TextView LocationField;
@@ -136,6 +140,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mMap.clear();
         Intent i = getIntent();
+        readLocsFromDB();
+
         Location location = (Location) i.getParcelableExtra("key");
         LatLng currentLoc = new LatLng(Double.parseDouble(location.get_Latitude()), Double.parseDouble(location.get_Longitude()));
         //LatLng sec = new LatLng(32.073698, 34.781924); // this is a test
@@ -161,6 +167,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
         addLocationsToMap(mMap); //read from db and marker them on map
         mMap.setMyLocationEnabled(true);
     }
@@ -199,29 +207,40 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void locateLocs() {
 
         //place the locations from the db on the map:
+        Log.d("result:", "locateLocs func ");
+
         for (int i = 0; i < locNumber; i++) {
-            LatLng currentLoc = new LatLng(Double.parseDouble(locsToMap.get(i).get_Latitude()), Double.parseDouble(locsToMap.get(i).get_Longitude()));
-            this.mMap.addMarker(new MarkerOptions().position(currentLoc).title("loc from db"));
-            Log.d("result:", "i is: " + i + " location added.");
+            LatLng thisLoc = new LatLng(Double.parseDouble(locsToMap.get(i).get_Latitude()), Double.parseDouble(locsToMap.get(i).get_Longitude()));
+            Marker marker = mMap.addMarker(
+                    new MarkerOptions()
+                            .position(thisLoc)
+                            .draggable(true));
+            this.mMap.addMarker(new MarkerOptions().position(thisLoc).title("loc from db"));
+            Log.d("result:", "i is: " + i + "- location added.");
 
         }
     }
 
 
     public void readLocsFromDB() {
-
-
         locationsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int counter = 0;
                 for (DataSnapshot snap : snapshot.getChildren()) {
-
+                    counter++;
+                    Log.d("result:", "readLocsFromDB func ");
                     Location loc = snap.getValue(Location.class);
                     assert loc != null;
                     Log.d("result:", "loc info is: " + loc.toString() + " lat is: " + loc.get_Latitude() + " lnglat: " + loc.get_Longitude());
                     locsToMap.add(loc);
 
                 }
+                counterLocsFromDB=counter;
+                Log.d("result:", "numLocsFromDB is: " +counterLocsFromDB);
+                locNumberRef.setValue(counterLocsFromDB);
+
+
             }
 
             @Override
@@ -230,6 +249,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
+
     }
 
 
