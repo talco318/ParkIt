@@ -3,69 +3,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#FFFFFF"
+    android:layout_height="match_parent"
+    android:background="#2A2625"
     android:orientation="vertical"
     tools:context=".welcomeFragment">
 
     <TextView
         android:id="@+id/hello"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2A2625"
         android:gravity="center_horizontal"
         android:text="Welcome to our app!!"
-        android:textSize="32sp"
-        android:textColor="@color/black"
-        android:textFontWeight="@integer/material_motion_duration_long_2"/>
+        android:textColor="#DEDEDE"
+        android:textFontWeight="@integer/material_motion_duration_long_2"
+        android:textSize="32sp" />
 
     <TextView
         android:id="@+id/hello2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2A2625"
         android:gravity="center_horizontal"
         android:text="To start using the app - you have to login or register."
-        android:textColor="@color/black"
+        android:textColor="#DEDEDE"
         android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/hello3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:textColor="@color/black"
-        android:textSize="24sp" />
-
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
 
         android:id="@+id/login"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/buttonstyle"
         android:hapticFeedbackEnabled="true"
         android:text="login"
         android:textColor="@color/white"
         android:theme="@style/ShapeAppearanceOverlay.Material3.Button"
-        app:backgroundTint="#0271C0"
         app:cornerRadius="10dp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/secButton"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
         android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
         android:layout_marginRight="4dp"
+        android:background="@drawable/buttonstyle"
         android:hapticFeedbackEnabled="true"
         android:text="Register"
         android:textColor="@color/white"
         android:theme="@style/ShapeAppearanceOverlay.Material3.Button"
-        app:backgroundTint="#0271C0"
         app:cornerRadius="10dp" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/icon"
-        android:contentDescription="@string/welcome"/>
+        android:layout_height="655dp"
+        android:background="#2A2625"
+        android:contentDescription="@string/welcome"
+        android:src="@drawable/welcomedashboard" />
 </LinearLayout>

@@ -1,83 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".loginFragments"
-    android:baselineAligned="false">
+    android:baselineAligned="false"
+    android:orientation="vertical"
+    android:background="#2A2625"
 
-    <LinearLayout
-        android:layout_width="0dp"
+    tools:context=".loginFragments">
+
+    <TextView
+        android:id="@+id/loginText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:background="#2D2D2D"
+        android:gravity="center_horizontal|center_vertical"
+        android:hint="@string/welcome_to_login_page"
+        android:text="@string/welcome_to_login_page"
+        android:textColor="#DEDEDE"
+        android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/loginText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.8"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/welcome_to_login_page"
-            android:textSize="30sp" />
+    <TextView
+        android:id="@+id/emailTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autoText="true"
+        android:background="#2D2D2D"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/email"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
 
-        <TextView
-            android:id="@+id/emailTitle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/email"
-            android:textSize="28sp" />
 
-        <EditText
-            android:id="@+id/emailLoginTb"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="@string/email_address"
-            android:autofillHints="emailAddress"
-            android:inputType="textEmailAddress"
-            android:minHeight="48dp"
-            android:background="@color/gray"/>
+    <EditText
+        android:id="@+id/emailLoginTb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4sp"
+        android:layout_marginRight="4sp"
+        android:autofillHints="emailAddress"
+        android:ems="10"
+        android:hint="@string/email_address"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:background="@drawable/edittextstyle"
+        android:textColorHint="@color/gray"
+        />
 
-        <TextView
-            android:id="@+id/passTitle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/password"
-            android:textSize="28sp" />
+    <TextView
+        android:id="@+id/passTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/password"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
 
-        <EditText
-            android:id="@+id/tbxLoginPassword"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:autofillHints="password"
-            android:ems="10"
-            android:hint="@string/password_login"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            android:text=""
-            android:textColorHint="#757575"
-            android:background="@color/gray"/>
+    <EditText
+        android:id="@+id/tbxLoginPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4sp"
+        android:layout_marginRight="4sp"
+        android:autofillHints="password"
+        android:ems="10"
+        android:hint="@string/password_login"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:text=""
+        android:background="@drawable/edittextstyle"
+        android:textColorHint="@color/gray" />
 
-        <Button
-            android:id="@+id/loginButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_weight="0.8"
-            android:backgroundTint="#0271C0"
-            android:text="@string/login"
-            android:textColor="@color/white"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:theme="@style/ShapeAppearanceOverlay.Material3.Button" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/buttonstyle"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:theme="@style/ShapeAppearanceOverlay.Material3.Button" />
 
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/loginphoto" />
 
 </LinearLayout>

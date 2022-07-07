@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layoutDescription="@xml/activity_sec_scene"
+    android:background="#2A2625"
     tools:context=".SecActivity">
 
     <fragment
@@ -23,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="The parking found in:"
+        android:textColor="@color/white"
         android:textSize="20sp" />
 
 
@@ -31,20 +33,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Place_Name"
+        android:textColor="@color/white"
         android:textSize="20sp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/add_parking_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:backgroundTint="@color/default_blue"
         android:onClick="onClickBtn"
         android:text="@string/add_this_parking"
         android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:minWidth="180sp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:background="@drawable/buttonstyle"
+        android:theme="@style/ShapeAppearanceOverlay.Material3.Button"
         tools:ignore="OnClick" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/view_ParkingButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
