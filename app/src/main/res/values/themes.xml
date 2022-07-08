@@ -2,6 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.BrandNewApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
+        <item name="android:navigationBarColor">#2A2625</item>
+
         <item name="colorPrimary">#F2A74A</item>
         <item name="colorPrimaryDark">#F2A74A</item>
         <item name="colorAccent">#F6A138</item>
