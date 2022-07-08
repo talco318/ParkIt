@@ -332,8 +332,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void addToView() {
-        TableLayout stk = (TableLayout) findViewById(R.id.tableLayout);
-        for (int i = 0; i < locsToMap.size(); i++) {
+        Intent i = getIntent();
+        Location location = (Location) i.getParcelableExtra("key");
+        LatLng currentLoc = new LatLng(Double.parseDouble(location.get_Latitude()), Double.parseDouble(location.get_Longitude()));
+        for (int j = 0; j < locsToMap.size(); j++) {
 
         }
 
