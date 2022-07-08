@@ -25,6 +25,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -95,6 +96,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         }
+
         locNumberRef.setValue(0);
 
     }
@@ -146,6 +148,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //LatLng sec = new LatLng(32.073698, 34.781924); // this is a test
         //mMap.addMarker(new MarkerOptions().position(currentLoc).title("Your current location"));
         //mMap.addMarker(new MarkerOptions().position(sec).title("Your sec location"));
+
+        mMap.setMapStyle(
+                MapStyleOptions.loadRawResourceStyle(this, R.raw.custom_map_style)
+        );
+
 
         MarkerOptions userIndicator = new MarkerOptions()
                 .position(new LatLng(Double.parseDouble(location.get_Latitude()), Double.parseDouble(location.get_Longitude())))
