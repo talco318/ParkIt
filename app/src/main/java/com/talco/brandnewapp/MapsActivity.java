@@ -15,11 +15,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -35,7 +33,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.talco.brandnewapp.databinding.ActivityMapsBinding;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +66,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locsToMap = new ArrayList<>(); // Create an ArrayList object
         markerArrayList = new ArrayList<>();
 
-        Log.d("result", "map activity");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -195,9 +191,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int locNum = (int) snapshot.getValue(int.class);
                 locNumber = locNum;
-                Log.d("result:", "locNum is: " + locNumber);
                 readLocsFromDB(); // read from db and add them to arrayList
-                //TODO: Add the locations from locsToMap to the map!
                 locateLocs();
 
             }
@@ -235,14 +229,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 int counter = 0;
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     counter++;
-                    Log.d("result:", "readLocsFromDB func ");
                     Location loc = snap.getValue(Location.class);
                     assert loc != null;
                     locsToMap.add(loc);
 
                 }
                 counterLocsFromDB=counter;
-                Log.d("result:", "numLocsFromDB is: " +counterLocsFromDB);
                 locNumberRef.setValue(counterLocsFromDB);
 
 

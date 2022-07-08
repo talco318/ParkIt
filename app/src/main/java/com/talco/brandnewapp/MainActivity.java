@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
                             //added:
                             //setContentView(R.layout.activity_sec);
 
-                            Log.d("result", "move _____________________________________________________________________");
                             Navigation.findNavController(view).navigate(R.id.action_login_to_maps);
 
 
