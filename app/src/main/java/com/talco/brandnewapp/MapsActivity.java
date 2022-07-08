@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -232,7 +231,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Log.d("result:", "readLocsFromDB func ");
                     Location loc = snap.getValue(Location.class);
                     assert loc != null;
-                    Log.d("result:", "loc info is: " + loc.toString() + " lat is: " + loc.get_Latitude() + " lnglat: " + loc.get_Longitude());
                     locsToMap.add(loc);
 
                 }
