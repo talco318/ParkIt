@@ -4,11 +4,11 @@
         <!-- Primary brand color. -->
         <item name="android:navigationBarColor">#2A2625</item>
 
-        <item name="colorPrimary">#F2A74A</item>
-        <item name="colorPrimaryDark">#F2A74A</item>
+        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">#F6A138</item>
 
-        <item name="colorPrimaryVariant">#F2A74A</item>
+        <item name="colorPrimaryVariant">#000000</item>
         <item name="colorOnPrimary">#2A2625</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#CC6420</item>
