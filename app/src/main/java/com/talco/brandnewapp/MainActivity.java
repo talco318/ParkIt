@@ -1,5 +1,8 @@
 package com.talco.brandnewapp;
 
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    public MediaPlayer mMediaPlayer = new MediaPlayer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +30,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d("result", "main activity");
+        SoundPlayer(this);
 
+
+    }
+    public static void SoundPlayer(Context ctx){
+        MediaPlayer mMediaPlayer = new MediaPlayer();
+        mMediaPlayer = MediaPlayer.create(ctx, R.raw.sound);
+        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mMediaPlayer.start();
+        mMediaPlayer.setLooping(false); // Set looping
+        mMediaPlayer.setVolume(100, 100);
+
+        //player.release();
+        mMediaPlayer.start();
     }
 
 
