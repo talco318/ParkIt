@@ -44,7 +44,7 @@ import java.util.Objects;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener{
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener , DialogInterface{
 
     public int locNumber;
     public int counterLocsFromDB ;
@@ -123,15 +123,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private String get_full_for_table(double latitude, double longitude) throws IOException {
-        StringBuilder fullstring = null;
+        StringBuffer fullstring = new StringBuffer();
         Geocoder geocoder;
         List<Address> addresses;
         geocoder = new Geocoder(this, Locale.getDefault());
         addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
         String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
         String city = addresses.get(0).getLocality();
-        assert fullstring != null;
-        fullstring.append(address).append(" ").append(city).append(" ");
+        fullstring.append(address).append(" ");
         return fullstring.toString();
     }
 
@@ -268,20 +267,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 double dist = (int)(Math.round(distance * 1000))/1000.0;
                 Toast.makeText(MapsActivity.this, "This location is " + dist + " km from you.", Toast.LENGTH_LONG).show();
                 //Intent navigation = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=" +marker.getPosition().latitude+","+marker.getPosition().longitude));
-                Intent navigation = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.waze.com/ul?ll=" +marker.getPosition().latitude+"%2C"+marker.getPosition().longitude+"&navigate=yes&zoom=17"));
-
-                startActivity(navigation);
-
+//                Intent navigation = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.waze.com/ul?ll=" +marker.getPosition().latitude+"%2C"+marker.getPosition().longitude+"&navigate=yes&zoom=17"));
+//
+//                startActivity(navigation);
+                popupMessage(marker);
                 return true;
             }
         });
 
     }
 
-    public void popupMessage(Marker marker) throws IOException {
+    public void popupMessage(Marker marker) {
+        String address = "";
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage("Do you want to navigate to this parking?.");
-        alertDialogBuilder.setTitle(get_full_for_table(marker.getPosition().latitude, marker.getPosition().longitude));
+        alertDialogBuilder.setMessage("Do you want to navigate to this parking?");
+        try {
+            address = get_full_for_table(marker.getPosition().latitude, marker.getPosition().longitude);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        alertDialogBuilder.setTitle(address+ " ");
         alertDialogBuilder.setNegativeButton("Navigate", new DialogInterface.OnClickListener(){
 
             @Override
@@ -313,6 +319,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    @Override
+    public void onLocationChanged(@NonNull List<android.location.Location> locations) {
+        LocationListener.super.onLocationChanged(locations);
+    }
+
+    @Override
+    public void onFlushComplete(int requestCode) {
+        LocationListener.super.onFlushComplete(requestCode);
+    }
 
 
     @Override
@@ -387,5 +402,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
 
+    @Override
+    public void cancel() {
+
+    }
+
+    @Override
+    public void dismiss() {
+
+    }
 }
