@@ -1,7 +1,9 @@
 package com.talco.brandnewapp;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -9,6 +11,7 @@ import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -38,8 +41,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
+
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener{
 
     public int locNumber;
     public int counterLocsFromDB ;
@@ -173,6 +178,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         addLocationsToMap(mMap); //read from db and marker them on map
         mMap.setMyLocationEnabled(true);
+        markerToast();
     }
 
 
@@ -250,6 +256,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+    public void markerToast(){
+        Intent i = getIntent();
+        Location location = (Location) i.getParcelableExtra("key");
+        LatLng thisLoc = new LatLng(Double.parseDouble(location.get_Latitude()), Double.parseDouble(location.get_Longitude()));
+
+        mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                double distance = distance(Double.parseDouble(location.get_Latitude()), Double.parseDouble(location.get_Longitude()),marker.getPosition().latitude,marker.getPosition().longitude);
+                double dist = (int)(Math.round(distance * 1000))/1000.0;
+                Toast.makeText(MapsActivity.this, "This location is " + dist + " km from you.", Toast.LENGTH_LONG).show();
+                //Intent navigation = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=" +marker.getPosition().latitude+","+marker.getPosition().longitude));
+                Intent navigation = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.waze.com/ul?ll=" +marker.getPosition().latitude+"%2C"+marker.getPosition().longitude+"&navigate=yes&zoom=17"));
+
+                startActivity(navigation);
+
+                return true;
+            }
+        });
+
+    }
+
+    public void popupMessage(Marker marker) throws IOException {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Do you want to navigate to this parking?.");
+        alertDialogBuilder.setTitle(get_full_for_table(marker.getPosition().latitude, marker.getPosition().longitude));
+        alertDialogBuilder.setNegativeButton("Navigate", new DialogInterface.OnClickListener(){
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent navigation = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.waze.com/ul?ll=" +marker.getPosition().latitude+"%2C"+marker.getPosition().longitude+"&navigate=yes&zoom=17"));
+                startActivity(navigation);
+            }
+        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+
+
     @Override
     public void onLocationChanged(@NonNull android.location.Location location) {
         Intent intent = new Intent(this, MapsActivity.class);
@@ -266,6 +312,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
     }
+
+
 
     @Override
     public void onProviderEnabled(@NonNull String provider) {
@@ -337,5 +385,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
     }
+
+
 
 }
