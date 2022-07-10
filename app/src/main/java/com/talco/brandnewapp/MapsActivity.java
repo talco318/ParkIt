@@ -34,6 +34,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.talco.brandnewapp.databinding.ActivityMapsBinding;
 import java.io.IOException;
@@ -288,7 +289,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         alertDialogBuilder.setTitle(address+ " ");
-        alertDialogBuilder.setNegativeButton("Navigate", new DialogInterface.OnClickListener(){
+        alertDialogBuilder.setPositiveButton("Navigate", new DialogInterface.OnClickListener(){
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -296,11 +297,62 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivity(navigation);
             }
         });
+        alertDialogBuilder.setNegativeButton("Delete parking" , new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                //TODO:
+                //delete marker + location from the db
+                //deleteLoc(marker);
+
+
+            }
+        });
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
 
 
+    public void deleteLoc(Marker maker){
+        Location locToDelete = new Location(maker.getPosition().latitude+"", maker.getPosition().longitude+"", false);
+        LatLng latLng = new LatLng(Double.parseDouble(locToDelete.get_Latitude()), Double.parseDouble(locToDelete.get_Longitude()));
+        Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
+        int id=0;
+        //the problem is here:
+        //______________________________________________
+//        for(Location l: locsToMap){
+//            if(l.equals(locToDelete)){
+//                id = l.get_id();
+//                locsToMap.remove(l);
+//                locNumber=locNumber-1;
+//            }
+//        }
+        //______________________________________________
+        for(Marker m: markerArrayList){
+            if(m.equals(marker)){
+                locsToMap.remove(m);
+            }
+        }
+
+        Query locationQuery = locationsRef.child(id+"");
+        locationQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot locationSnapshot: snapshot.getChildren()) {
+                    locationSnapshot.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("result", "onCancelled", error.toException());
+
+            }
+        });
+
+        locNumberRef.setValue(locNumber);
+        addLocationsToMap(mMap);
+    }
 
     @Override
     public void onLocationChanged(@NonNull android.location.Location location) {
@@ -391,15 +443,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return (dist);
     }
 
-    public void addToView() {
-        Intent i = getIntent();
-        Location location = (Location) i.getParcelableExtra("key");
-        LatLng currentLoc = new LatLng(Double.parseDouble(location.get_Latitude()), Double.parseDouble(location.get_Longitude()));
-        for (int j = 0; j < locsToMap.size(); j++) {
-
-        }
-
-    }
 
 
     @Override
