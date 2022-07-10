@@ -3,6 +3,8 @@ package com.talco.brandnewapp;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Objects;
+
 public class Location implements Parcelable {
 
 
@@ -36,6 +38,11 @@ public class Location implements Parcelable {
 
     }
 
+    public Location(String x, String y, boolean bool){
+        Latitude = x;
+        Longitude = y;
+    }
+
     public Location() {
         Latitude = null;
         Longitude = null;
@@ -44,6 +51,17 @@ public class Location implements Parcelable {
     protected Location(Parcel in) {
         Latitude = in.readString();
         Longitude = in.readString();
+    }
+
+    public boolean equals(Location loc) {
+        if(this.get_Latitude().equals(loc.get_Latitude()) && this.get_Longitude().equals(loc.get_Longitude()))
+            return true;
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Latitude, Longitude);
     }
 
     public String get_Latitude() {
