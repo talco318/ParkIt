@@ -53,7 +53,7 @@ public class Location implements Parcelable {
         Longitude = in.readString();
     }
 
-    public boolean equals(Location loc) {
+    public boolean locEquals(Location loc) {
         if(this.get_Latitude().equals(loc.get_Latitude()) && this.get_Longitude().equals(loc.get_Longitude()))
             return true;
         return false;
