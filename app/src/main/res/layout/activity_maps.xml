@@ -23,6 +23,7 @@
         android:id="@+id/placeNameTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
         android:text="The parking found in:"
         android:textColor="@color/white"
         android:textSize="20sp" />
@@ -32,6 +33,7 @@
         android:id="@+id/placeName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
         android:text="Place_Name"
         android:textColor="@color/white"
         android:textSize="20sp" />

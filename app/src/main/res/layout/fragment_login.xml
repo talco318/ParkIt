@@ -15,9 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#2D2D2D"
+        android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center_horizontal|center_vertical"
         android:hint="@string/welcome_to_login_page"
-        android:text="@string/welcome_to_login_page"
+        android:text="Login to ParkIt"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
 
@@ -27,6 +28,7 @@
         android:layout_height="wrap_content"
         android:autoText="true"
         android:background="#2D2D2D"
+        android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/email"
         android:textColor="@color/white"
@@ -53,6 +55,7 @@
         android:id="@+id/passTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/password"
         android:textColor="@color/white"

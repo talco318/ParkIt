@@ -14,6 +14,7 @@
         android:id="@+id/are_you_sure"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center|center_horizontal|center_vertical"
         android:text="Do you want to exit? "
         android:textColor="#FF0000"

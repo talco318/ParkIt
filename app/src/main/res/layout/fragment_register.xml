@@ -23,10 +23,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center_horizontal|center_vertical"
-            android:text="Welcome to register page"
-            android:textSize="30sp"
-            android:textColor="#DEDEDE" />
+            android:text="Register to ParkIt"
+            android:textColor="#DEDEDE"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/emailTitle"
@@ -34,7 +35,9 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10sp"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center_horizontal|center_vertical"
+
             android:text="Email:"
             android:textColor="@color/white"
             android:textSize="24sp" />
@@ -65,9 +68,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center_horizontal|center_vertical"
-            android:textColor="@color/white"
             android:text="Password:"
+            android:textColor="@color/white"
             android:textSize="24sp" />
 
         <EditText
@@ -94,6 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center_horizontal|center_vertical"
             android:text="Password validation:"
             android:textColor="@color/white"
@@ -122,6 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center_horizontal|center_vertical"
             android:text="Phone Number:"
             android:textColor="@color/white"
@@ -152,6 +158,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center_horizontal|center_vertical"
             android:text="Full name:"
             android:textColor="@color/white"
