@@ -160,7 +160,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .title("You are here")
                 .snippet("lat:" + Double.parseDouble(location.get_Latitude()) + ", lng:" +  Double.parseDouble(location.get_Longitude()));
         marker = googleMap.addMarker(userIndicator);
-        markerArrayList.add(marker);
+        //markerArrayList.add(marker);
 
 
 
@@ -197,7 +197,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int locNum = (int) snapshot.getValue(int.class);
                 locNumber = locNum;
-                readLocsFromDB(); // read from db and add them to arrayList
+                //readLocsFromDB(); // read from db and add them to arrayList
                 locateLocs();
 
             }
@@ -229,6 +229,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     public void readLocsFromDB() {
+        removeAlllocsFromLocal();
         locationsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -237,7 +238,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     counter++;
                     Location loc = snap.getValue(Location.class);
                     assert loc != null;
+                    LatLng newLoc = new LatLng(Double.parseDouble(loc.get_Latitude()), Double.parseDouble(loc.get_Longitude()));
+                    Marker newMarker = mMap.addMarker(
+                            new MarkerOptions()
+                                    .position(newLoc)
+                                    .draggable(true));
                     locsToMap.add(loc);
+                    //TODO:
+                    //ADD MARKER TO THE MARKER ARRAY
+                    markerArrayList.add(newMarker);
+
+
 
                 }
                 counterLocsFromDB=counter;
@@ -255,6 +266,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+
+    public void removeAlllocsFromLocal(){
+        for(int i=0; i<locsToMap.size(); i++){
+            locsToMap.remove(i);
+        }
+    }
 
     public void markerToast(){
         Intent i = getIntent();
@@ -303,7 +320,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 //TODO:
                 //delete marker + location from the db
-                //deleteLoc(marker);
+                deleteLoc(marker);
 
 
             }
@@ -316,42 +333,48 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void deleteLoc(Marker maker){
         Location locToDelete = new Location(maker.getPosition().latitude+"", maker.getPosition().longitude+"", false);
         LatLng latLng = new LatLng(Double.parseDouble(locToDelete.get_Latitude()), Double.parseDouble(locToDelete.get_Longitude()));
-        Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
+        //Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
         int id=0;
-        //the problem is here:
-        //______________________________________________
-//        for(Location l: locsToMap){
-//            if(l.equals(locToDelete)){
-//                id = l.get_id();
-//                locsToMap.remove(l);
-//                locNumber=locNumber-1;
-//            }
-//        }
-        //______________________________________________
-        for(Marker m: markerArrayList){
-            if(m.equals(marker)){
-                locsToMap.remove(m);
+
+        Log.d("to be remove", maker.getPosition().latitude + ", " + maker.getPosition().longitude);
+        for(int i=0; i<locsToMap.size(); i++){
+            if(locsToMap.get(i).locEquals(locToDelete)){
+                id = locsToMap.get(i).get_id();
+                Log.d("removing", locsToMap.get(i).get_Latitude() + ", " + locsToMap.get(i).get_Longitude());
+                locsToMap.remove(i);
+                locNumber=locNumber-1;
+                break;
+            }
+        }
+        Log.d("marker to be remove", maker.getPosition().latitude + ", " + maker.getPosition().longitude);
+        for(int j=0; j<markerArrayList.size(); j++){
+            if((markerArrayList.get(j).getPosition().latitude+"").equals(locToDelete.get_Latitude())&&(markerArrayList.get(j).getPosition().longitude+"").equals(locToDelete.get_Longitude())){
+                Log.d("removing marker ", markerArrayList.get(j).getPosition().latitude + ", " + markerArrayList.get(j).getPosition().longitude);
+                markerArrayList.remove(j);
+                break;
             }
         }
 
+
         Query locationQuery = locationsRef.child(id+"");
-        locationQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot locationSnapshot: snapshot.getChildren()) {
-                    locationSnapshot.getRef().removeValue();
-                }
-            }
+//        locationQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot locationSnapshot: snapshot.getChildren()) {
+//                    locationSnapshot.getRef().removeValue();
+//
+//                }
+//            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("result", "onCancelled", error.toException());
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Log.e("result", "onCancelled", error.toException());
+//
+//            }
+//        });
 
-            }
-        });
-
-        locNumberRef.setValue(locNumber);
-        addLocationsToMap(mMap);
+//        locNumberRef.setValue(locNumber);
+//        addLocationsToMap(mMap);
     }
 
     @Override
@@ -412,6 +435,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Toast.LENGTH_SHORT).show();
         locNumberRef.setValue(l.get_id());
         //addToView();
+
         Toast.makeText(this, "Location added!", Toast.LENGTH_LONG).show();
 
     }
