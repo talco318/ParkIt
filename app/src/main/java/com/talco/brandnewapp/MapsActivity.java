@@ -211,7 +211,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void locateLocs() {
-
+        mMap.clear();
         //place the locations from the db on the map:
         Log.d("result:", "locateLocs func ");
 
@@ -284,10 +284,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 double distance = distance(Double.parseDouble(location.get_Latitude()), Double.parseDouble(location.get_Longitude()),marker.getPosition().latitude,marker.getPosition().longitude);
                 double dist = (int)(Math.round(distance * 1000))/1000.0;
                 Toast.makeText(MapsActivity.this, "This location is " + dist + " km from you.", Toast.LENGTH_LONG).show();
-                //Intent navigation = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=" +marker.getPosition().latitude+","+marker.getPosition().longitude));
-//                Intent navigation = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.waze.com/ul?ll=" +marker.getPosition().latitude+"%2C"+marker.getPosition().longitude+"&navigate=yes&zoom=17"));
-//
-//                startActivity(navigation);
                 popupMessage(marker);
                 return true;
             }
@@ -323,6 +319,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 deleteLoc(marker);
 
 
+
             }
         });
         AlertDialog alertDialog = alertDialogBuilder.create();
@@ -334,7 +331,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Location locToDelete = new Location(maker.getPosition().latitude+"", maker.getPosition().longitude+"", false);
         LatLng latLng = new LatLng(Double.parseDouble(locToDelete.get_Latitude()), Double.parseDouble(locToDelete.get_Longitude()));
         //Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
-        int id=0;
+        int id=54353;
 
         Log.d("to be remove", maker.getPosition().latitude + ", " + maker.getPosition().longitude);
         for(int i=0; i<locsToMap.size(); i++){
@@ -357,24 +354,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         Query locationQuery = locationsRef.child(id+"");
-//        locationQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot locationSnapshot: snapshot.getChildren()) {
-//                    locationSnapshot.getRef().removeValue();
-//
-//                }
-//            }
+        Log.d("id to delete ", id +"");
 
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Log.e("result", "onCancelled", error.toException());
-//
-//            }
-//        });
+        locationQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("result ", "data change!");
+                for (DataSnapshot locationSnapshot: snapshot.getChildren()) {
+                    Log.d("result ", "found!");
+                    locationSnapshot.getRef().removeValue();
+                }
+            }
 
-//        locNumberRef.setValue(locNumber);
-//        addLocationsToMap(mMap);
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("result", "onCancelled", error.toException());
+
+            }
+        });
+
+        locNumberRef.setValue(locNumber); //is working
+        addLocationsToMap(mMap);
     }
 
     @Override
