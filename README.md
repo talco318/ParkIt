@@ -1,4 +1,4 @@
-# parkit app
+# ParkIt app
 
 Video of the app:
 
