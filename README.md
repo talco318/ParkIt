@@ -16,6 +16,6 @@ User Profiles: ParkIt offers user profiles where users can manage their shared s
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/fK0tCepZHSo/0.jpg)](https://www.youtube.com/watch?v=fK0tCepZHSo)
 
 
-Firebase database screenshot:
+**Firebase database screenshot:**
 
 ![locations database picture](https://user-images.githubusercontent.com/12784722/181025510-3eb27b83-f178-477a-a972-faa1702ed371.png)
